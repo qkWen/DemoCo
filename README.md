@@ -7,4 +7,6 @@ Scheduler为管理类<br>
   
   test 为切换协程测试程序<br>
     PrintfStackFunName()  为打印函数调用栈<br>
-    foo() 为协程执行的目标函数，以参数形式传入createCo方法中
+    foo() 为协程执行的目标函数，以参数形式传入createCo方法中<br>
+   
+   后续考虑将协程库与IO异步操作结合
