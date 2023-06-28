@@ -22,13 +22,13 @@
         getcontext(&NowCtx);
         NowCtx.uc_stack.ss_sp = stack;
         NowCtx.uc_stack.ss_size = STACK_SIZE;
-        NowCtx.uc_link = &mainCtx;
+        NowCtx.uc_link = &mainCtx;     // 如果协程执行完，则切换到mainCtx主协程中进行执行
         runCoId = cid;
         Corou->setStatus(Coroutine::status::COROUTINE_RUNNING);
 
         ptr = (uintptr_t)this;
         makecontext(&NowCtx,(void(*)(void))mainfunc,2, (uint32_t)ptr, (uint32_t)(ptr >> 32));
-        swapcontext(&mainCtx, &NowCtx); 
+        swapcontext(&mainCtx, &NowCtx);   //当前的上下文内容放入mainCtx中，并将NowCtx的上下文替换到当前上下文
         break;
 
     case Coroutine::status::COROUTINE_SUSPEND:
